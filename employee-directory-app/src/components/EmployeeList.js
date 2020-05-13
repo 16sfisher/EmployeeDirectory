@@ -14,7 +14,7 @@ class EmployeeList extends Component {
                         Name
                     </th>
                     <th>
-                        email
+                        Email
                     </th>
                     <th>
                         Cell

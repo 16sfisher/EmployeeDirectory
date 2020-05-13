@@ -11,24 +11,24 @@ class Container extends React.Component {
 
     componentDidMount() {
         getUsers().then((res) => {
-            this.setState({people: res.data.results, filteredPeople: res.data.results})
+            this.setState({ people: res.data.results, filteredPeople: res.data.results })
         })
     }
 
-    searchPhone = (num) => {
+    search = (term) => {
         const filteredEmployees = this.state.people.filter((person) => {
-            if(person.cell.includes(num)) {
+            if (person.cell.includes(term) || (person.name.first + " " + person.name.last).includes(term) || person.email.includes(term)) {
                 return person
             }
         });
-        this.setState({filteredPeople: filteredEmployees});
+        this.setState({ filteredPeople: filteredEmployees });
     }
 
     render() {
         return (
             <div>
-                <Header search={this.searchPhone} />
-                <EmployeeList people={this.state.filteredPeople}/>
+                <Header search={this.search} />
+                <EmployeeList people={this.state.filteredPeople} />
             </div>
         )
     }
