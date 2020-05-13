@@ -3,23 +3,47 @@ import '../App.css';
 
 class EmployeeList extends Component {
     render() {
-        console.log(this.props.people)
         return (
-            <ul>
-                {this.props.people.map((person) => {
+            <table>
+                <thead>
+                <tr>
+                    <th>
+
+                    </th>
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        email
+                    </th>
+                    <th>
+                        Cell
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                {this.props.people.map((person, i) => {
                     return (
-                        <li>
-                            {person.name.first}
-                        </li>
+                        <tr key={i}>
+                            <td>
+                                <img src={person.picture.thumbnail} alt='Thumbnail image'/>
+                            </td>
+                            <td>
+                                {person.name.first + " " + person.name.last}
+                            </td>
+                            <td>
+                                {person.email}
+                            </td>
+                            <td>
+                                {person.cell}
+                            </td>
+                        </tr>
                     )
                 })}
-            </ul>
+                </tbody>
+            </table>
         )
     }
 }
 
 export default EmployeeList;
-
-// {people.data.results.map((person) => {
-//     return <li>{person.name.last}</li>
-// })} 

@@ -5,23 +5,33 @@ import getUsers from './utils/API';
 
 class Container extends React.Component {
     state = {
-        people: []
+        people: [],
+        filteredPeople: []
     }
 
     componentDidMount() {
         getUsers().then((res) => {
-            this.setState({people: res.data.results})
+            this.setState({people: res.data.results, filteredPeople: res.data.results})
         })
+    }
+
+    searchPhone = (num) => {
+        const filteredEmployees = this.state.people.filter((person) => {
+            if(person.cell.includes(num)) {
+                return person
+            }
+        });
+        this.setState({filteredPeople: filteredEmployees});
     }
 
     render() {
         return (
             <div>
-                <Header/>
-                <EmployeeList people={this.state.people}/>
+                <Header search={this.searchPhone} />
+                <EmployeeList people={this.state.filteredPeople}/>
             </div>
         )
     }
 }
 
-export default Container; 
+export default Container;
